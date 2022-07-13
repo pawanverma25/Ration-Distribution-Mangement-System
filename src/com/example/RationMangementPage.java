@@ -12,7 +12,7 @@ import java.time.Month;
 import java.util.Vector;
 
 //create NewPage class to create a new page on which user will navigate
-class RationManagementPage extends JFrame implements ActionListener
+class RationDistributionManagementPage extends JFrame implements ActionListener
 {
     final JFrame mgmtFrame;
     JLabel rationID, cardholderName, errorLabel, dateLabel, lastDate, verificationLabel;
@@ -27,7 +27,7 @@ class RationManagementPage extends JFrame implements ActionListener
     String cardNO;
 
     //constructor
-    RationManagementPage()
+    RationDistributionManagementPage()
     {
         //get dimensions of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

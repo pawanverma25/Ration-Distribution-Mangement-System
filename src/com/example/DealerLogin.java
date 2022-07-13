@@ -96,7 +96,7 @@ class DealerLogin extends JFrame implements ActionListener
                 loginFrame.repaint();
             }else {
                 if(password.equals(rs.getString(3))){
-                    new RationManagementPage();
+                    new RationDistributionManagementPage();
                     loginFrame.dispose();
                 } else {
                     loginFrame.setTitle("!!!Wrong PASSWORD, password doesn't match. Try Again!!");
@@ -112,7 +112,7 @@ class DealerLogin extends JFrame implements ActionListener
     }
 }
 
-class LoginFormDemo
+class Login
 {
     public static void main(String... arg)
     {
