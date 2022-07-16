@@ -1,5 +1,12 @@
 package com.example;
 
+/*
+  RationDistributionManagementPage.java - auxiliary definitions for consumer verification and ration distribution page
+  *
+  @author
+ *   Pawan Verma, Bk Birla Institute of Engineering and Technology
+ */
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -144,10 +151,10 @@ class RationDistributionManagementPage extends JFrame implements ActionListener
 
         checkoutButton.addActionListener(e ->{
             try{
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/ration_supply","root","1230");
                 Statement stmt=con.createStatement();
-                stmt.executeQuery("update card_table SET last_received = '"+now+"' WHERE card_no = '"+ cardNO +"';");
+                stmt.executeUpdate("update card_table SET last_received = '"+now+"' WHERE card_no = '"+ cardNO +"';");
                 con.close();
             }
             catch(Exception exe) {
@@ -221,26 +228,39 @@ class RationDistributionManagementPage extends JFrame implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String verificationID = verificationField.getText();
 
-        if(data.elementAt(selectedRow).equals(verificationID)){
-            LocalDate date = LocalDate.parse(lastDate.getText());
-            Month lastCheckedMonth = date.getMonth();
-            now = LocalDate.now();
-            Month currentMonth = now.getMonth();
+        if(verifyButton.getText().equals("Retry")) {
+            verificationLabel.setText("Verification ID:");
+            mgmtFrame.add(verificationField);
+            mgmtFrame.add(verificationLabel);
+            verifyButton.setText("Verify");
+            mgmtFrame.repaint();
+        } else {
 
-            if(date.compareTo(now) < 0 && lastCheckedMonth != currentMonth){
-                verificationLabel.setText("Verified!! Now you may receive ration.");
-                mgmtFrame.add(checkoutButton);
+            String verificationID = verificationField.getText();
+
+            if (data.elementAt(selectedRow).equals(verificationID)) {
+                LocalDate date = LocalDate.parse(lastDate.getText());
+                Month lastCheckedMonth = date.getMonth();
+                now = LocalDate.now();
+                Month currentMonth = now.getMonth();
+
+                if (date.compareTo(now) < 0 && lastCheckedMonth != currentMonth) {
+                    verificationLabel.setText("Verified!! Now you may receive ration.");
+                    mgmtFrame.add(checkoutButton);
+
+                } else {
+                    verificationLabel.setText("Come again in next month!!");
+                }
 
             } else {
-                verificationLabel.setText("Come again in next month!!");
+                verificationLabel.setText("Invalid Verification ID !!");
+                verifyButton.setText("Retry");
             }
-
-        } else {
-            verificationLabel.setText("Invalid Verification ID !!");
         }
-        mgmtFrame.remove(verifyButton);
+        if(!verifyButton.getText().equals("Retry")) {
+            mgmtFrame.remove(verifyButton);
+        }
         mgmtFrame.remove(verificationField);
         mgmtFrame.repaint();
     }

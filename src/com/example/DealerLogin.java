@@ -1,5 +1,11 @@
 package com.example;
 
+/*
+ * DealerLogin.java - dealer verification page
+ *
+ * @author
+ *   Pawan Verma, Bk Birla Institute of Engineering and Technology
+ */
 
 import javax.swing.*;
 import java.awt.*;
