@@ -22,7 +22,7 @@ It is a java based Ration Distribution GUI program . It provides a dealer and ra
 
 - Clone the project to IDE
 
-- Setup MySQL database using `databse.sql`
+- Setup MySQL database using `.sql/databse.sql`
 
 - Fill the databse with entries
 
